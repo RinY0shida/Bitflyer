@@ -2,77 +2,34 @@ import pandas as pd
 import numpy as np
 import requests
 
-daily_amount = 2000
-hourly_amount = 2000
-minute_amount = 2000
-
-
-def miniutu_ohlc():
-    response = requests.get("https://min-api.cryptocompare.com/data/v2/histominute?fsym=BTC&tsym=JPY&limit=2000")
+def get_ohlc_data(interval):
+    url = f"https://min-api.cryptocompare.com/data/v2/{interval}?fsym=BTC&tsym=JPY&limit=2000"
+    response = requests.get(url)
+    
+    if response.status_code != 200:
+        print(f"Error fetching data: {response.status_code}")
+        return []
+    
     stock_data = response.json()["Data"]["Data"]
-
-    data_list = []
-
-    for data in stock_data:
-        data_list.append({
-            "open": data["open"],
-            "high": data["high"],
-            "low": data["low"],
-            "close": data["close"]
-        })
+    
+    data_list = [{
+        "open": data["open"],
+        "high": data["high"],
+        "low": data["low"],
+        "close": data["close"]
+    } for data in stock_data]
+    
     return data_list
 
+# 各タイムフレームのデータを取得
+minute_ohlc_result = get_ohlc_data("histominute")
+hourly_ohlc_result = get_ohlc_data("histohour")
+daily_ohlc_result = get_ohlc_data("histoday")
 
-def hourly_ohlc():
-    response = requests.get("https://min-api.cryptocompare.com/data/v2/histohour?fsym=BTC&tsym=JPY&limit=2000")
-    stock_data = response.json()["Data"]["Data"]
+# データの個数を表示
+print(f"取得した分足データの個数: {len(minute_ohlc_result)}個")
+print(f"取得した時足データの個数: {len(hourly_ohlc_result)}個")
+print(f"取得した日足データの個数: {len(daily_ohlc_result)}個")
 
-    data_list = []
-
-    for data in stock_data:
-        data_list.append({
-            "open": data["open"],
-            "high": data["high"],
-            "low": data["low"],
-            "close": data["close"]
-        })
-    return data_list
-
-
-def daily_amount():
-    response = requests.get("https://min-api.cryptocompare.com/data/v2/histoday?fsym=BTC&tsym=JPY&limit=2000")
-    stock_data = response.json()["Data"]["Data"]
-
-    data_list = []
-
-    for data in stock_data:
-        data_list.append({
-            "open": data["open"],
-            "high": data["high"],
-            "low": data["low"],
-            "close": data["close"]
-        })
-    return data_list
-
-
-
-miniutu_ohlc_result = miniutu_ohlc()
-hourly_ohlc_result = hourly_ohlc()
-daily_amount_result = daily_amount()
-
-#print(f"取得したデータの個数: {len(miniutu_ohlc_result)}個")
-#print(f"取得したデータの個数: {len(hourly_ohlc_result)}個"
-#print(f"取得したデータの個数: {len(daily_amount_result)}個")
-
-
-for i, data in enumerate(result[:2001]):
+for i, data in enumerate(minute_ohlc_result[:2001]):
     print(f"Data {i}: Open {data['open']}, High {data['high']}, Low {data['low']}, Close {data['close']}")
-
-
-
-
-
-
-
-
-
