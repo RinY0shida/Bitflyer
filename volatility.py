@@ -33,3 +33,9 @@ print(f"取得した日足データの個数: {len(daily_ohlc_result)}個")
 
 for i, data in enumerate(minute_ohlc_result[:2001]):
     print(f"Data {i}: Open {data['open']}, High {data['high']}, Low {data['low']}, Close {data['close']}")
+
+for i, data in enumerate(hourly_ohlc_result[:2001]):
+    print(f"Data {i}: Open {data['open']}, High {data['high']}, Low {data['low']}, Close {data['close']}")
+
+for i, data in enumerate(daily_ohlc_result[:2001]):
+    print(f"Data {i}: Open {data['open']}, High {data['high']}, Low {data['low']}, Close {data['close']}")
