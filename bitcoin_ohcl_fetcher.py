@@ -3,8 +3,7 @@ import numpy as np
 import requests
 
 class BitcointOhclFetcher:
-    
-    def FetchOhclData(interval):
+    def FetchOhclData(self, interval):
         url = f"https://min-api.cryptocompare.com/data/v2/{interval}?fsym=BTC&tsym=JPY&limit=2000"
         response = requests.get(url)
     

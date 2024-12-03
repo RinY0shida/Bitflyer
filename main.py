@@ -4,6 +4,7 @@ def main():
     bitcoin_ohcl_fetcher = BitcointOhclFetcher()
     
     minute_ohcl_result = bitcoin_ohcl_fetcher.FetchOhclData("histominute")
-    printf(f"取得した分速データの個数: {len(minute_ohlc_result)}個")
+    print(f"取得した分速データの個数: {len(minute_ohcl_result)}個")
 
-main()
+if __name__ == "__main__":
+    main()
