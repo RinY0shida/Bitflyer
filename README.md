@@ -1,4 +1,6 @@
-# Bitflyer
+# bitcoin-auto-trader
+### introduction
+- ビットコインの自動取引システム
 
 ### bidcoint_ohcl_fetcher
 - ビットコインのopen,close,high,lowを取得するクラス
