@@ -3,6 +3,11 @@ import numpy as np
 import requests
 
 class BitcointOhclFetcher:
+    
+    # @brief OHCLデータを取得する
+    # @param interval 取得するOHCLデータの間隔 (histominute, histohour, histoday)
+    # @param num 取得するOHCLデータの個数
+    # @return OHCLデータのリスト
     def FetchOhclData(self, interval, num):
         url = f"https://min-api.cryptocompare.com/data/v2/{interval}?fsym=BTC&tsym=JPY&limit={num}"
         response = requests.get(url)
